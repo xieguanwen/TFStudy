@@ -3,7 +3,8 @@ import tensorflow as tf,os
 # warnings.filterwarnings("ignore")
 from tensorflow.contrib.learn.python.learn.datasets.mnist import read_data_sets
 
-dataPath = os.path.join('..','data/mnist/')
+rootPath = os.path.dirname(os.path.dirname(__file__))
+dataPath = os.path.join(rootPath,'data/mnist/')
 mnist = read_data_sets(dataPath, one_hot=True)
 
 # NETWORK TOPOLOGIES
@@ -75,7 +76,7 @@ for epoch in range(training_epochs):
         test_acc = sess.run(accr, feed_dict=feeds)
         print ("TEST ACCURACY: %.3f" % (test_acc))
 saver = tf.train.Saver()
-saver.save(sess,os.path.join('.','model/logisctic/mnist'))
+saver.save(sess,os.path.join(rootPath,'nn/model/logistic/mnist.ckpt'))
 print ("OPTIMIZATION FINISHED")
 
 

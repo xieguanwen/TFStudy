@@ -3,7 +3,8 @@ from tensorflow.contrib.learn.python.learn.datasets.mnist import read_data_sets
 import numpy as np
 import matplotlib.pyplot as plt
 
-dataPath = os.path.join('..','data/mnist/')
+rootPath = os.path.dirname(os.path.dirname(__file__))
+dataPath = os.path.join(rootPath,'data/mnist/')
 mnist = read_data_sets(dataPath, one_hot=True)
 
 n_input  = 784
@@ -91,5 +92,5 @@ for epoch in range(training_epochs):
         print ("TEST ACCURACY: %.3f" % (test_acc))
 
 saver = tf.train.Saver()
-saver.save(sess,os.path.join('.','model/cnn/mnist'))
+saver.save(sess,os.path.join(rootPath,'nn/model/cnn/mnist.ckpt'))
 print ("OPTIMIZATION FINISHED")
