@@ -56,16 +56,16 @@ keepratio = tf.placeholder(tf.float32)
 # FUNCTIONS
 
 _pred = conv_basic(x, weights, biases, keepratio)['out']
-cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits=_pred, labels=y))
+cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits_v2(logits=_pred, labels=y))
 optm = tf.train.AdamOptimizer(learning_rate=0.001).minimize(cost)
 _corr = tf.equal(tf.argmax(_pred,1), tf.argmax(y,1))
 accr = tf.reduce_mean(tf.cast(_corr, tf.float32))
 init = tf.global_variables_initializer()
 
 
-training_epochs = 20
+training_epochs = 4
 batch_size      = 100
-display_step    = 4
+display_step    = 2
 # LAUNCH THE GRAPH
 sess = tf.Session()
 sess.run(init)
@@ -76,17 +76,17 @@ for epoch in range(training_epochs):
     # ITERATION
     for i in range(total_batch):
         batch_xs, batch_ys = mnist.train.next_batch(batch_size)
-        feeds = {x: batch_xs, y: batch_ys}
+        feeds = {x: batch_xs, y: batch_ys,keepratio:0.7}
         sess.run(optm, feed_dict=feeds)
         avg_cost += sess.run(cost, feed_dict=feeds)
     avg_cost = avg_cost / total_batch
     # DISPLAY
     if (epoch+1) % display_step == 0:
         print ("Epoch: %03d/%03d cost: %.9f" % (epoch, training_epochs, avg_cost))
-        feeds = {x: batch_xs, y: batch_ys}
+        feeds = {x: batch_xs, y: batch_ys, keepratio:1.0}
         train_acc = sess.run(accr, feed_dict=feeds)
         print ("TRAIN ACCURACY: %.3f" % (train_acc))
-        feeds = {x: mnist.test.images, y: mnist.test.labels}
+        feeds = {x: mnist.test.images, y: mnist.test.labels,keepratio:1.0}
         test_acc = sess.run(accr, feed_dict=feeds)
         print ("TEST ACCURACY: %.3f" % (test_acc))
 
