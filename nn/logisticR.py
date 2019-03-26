@@ -49,7 +49,7 @@ accr = tf.reduce_mean(tf.cast(corr, "float"))
 init = tf.global_variables_initializer()
 print ("FUNCTIONS READY")
 
-training_epochs = 200
+training_epochs = 201
 batch_size      = 100
 display_step    = 20
 # LAUNCH THE GRAPH
