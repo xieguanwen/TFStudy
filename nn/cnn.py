@@ -93,4 +93,6 @@ for epoch in range(training_epochs):
 
 saver = tf.train.Saver()
 saver.save(sess,os.path.join(rootPath,'nn/model/cnn/mnist.ckpt'))
-print ("OPTIMIZATION FINISHED")
+print ("--"*50)
+print("success")
+print ("--"*50)
