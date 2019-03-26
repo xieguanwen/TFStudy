@@ -5,7 +5,7 @@ from tensorflow.contrib.learn.python.learn.datasets.mnist import read_data_sets
 
 rootPath = os.path.dirname(os.path.dirname(__file__))
 dataPath = os.path.join(rootPath,'data/mnist/')
-mnist = read_data_sets(dataPath, one_hot=True)
+mnist = read_data_sets(dataPath, one_hot=True) #one_hot = True 表示如果本地没有，则网上下载
 
 # NETWORK TOPOLOGIES
 n_hidden_1 = 256
