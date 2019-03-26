@@ -75,7 +75,7 @@ for epoch in range(training_epochs):
         test_acc = sess.run(accr, feed_dict=feeds)
         print ("TEST ACCURACY: %.3f" % (test_acc))
 saver = tf.train.Saver()
-saver.save(sess,os.path.join('.','session/mnist'))
+saver.save(sess,os.path.join('.','model/logisctic/mnist'))
 print ("OPTIMIZATION FINISHED")
 
 
