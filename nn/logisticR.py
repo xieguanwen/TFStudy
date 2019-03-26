@@ -51,7 +51,7 @@ print ("FUNCTIONS READY")
 
 training_epochs = 200
 batch_size      = 100
-display_step    = 4
+display_step    = 20
 # LAUNCH THE GRAPH
 sess = tf.Session()
 sess.run(init)
@@ -75,8 +75,9 @@ for epoch in range(training_epochs):
         feeds = {x: mnist.test.images, y: mnist.test.labels}
         test_acc = sess.run(accr, feed_dict=feeds)
         print ("TEST ACCURACY: %.3f" % (test_acc))
-saver = tf.train.Saver()
-saver.save(sess,os.path.join(rootPath,'nn/model/logistic/mnist.ckpt'))
+
+        saver = tf.train.Saver(max_to_keep=3)
+        saver.save(sess,os.path.join(rootPath,'nn/model/logistic/mnist.ckpt'))
 print ("OPTIMIZATION FINISHED")
 
 
